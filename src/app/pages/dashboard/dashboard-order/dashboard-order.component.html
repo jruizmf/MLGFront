@@ -1,0 +1,9 @@
+<div>
+	<h5 class="mb-3 font-medium">Orders</h5>
+	<div class="flex items-center ml-auto">
+		<!-- <button [class.text-accent]="view === 'grid'" (click)="view = 'grid'" mat-icon-button class="view__btn"><mat-icon>grid_view</mat-icon></button>
+		<button [class.text-accent]="view === 'list'" (click)="view = 'list'" mat-icon-button class="view__btn"><mat-icon>list_alt</mat-icon></button>
+			 -->
+	</div>
+	<app-order-list [linkTo]="'/dashboard/order/details/'" [orders]="orders"></app-order-list>  
+</div>

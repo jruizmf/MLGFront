@@ -1,0 +1,95 @@
+<div class="mt-32">
+  <div class="container">
+    <div class="grid grid-cols-12 gap-8">
+      <div class="col-span-12 md:col-span-7 xl:col-span-8 border p-5">
+        <a *ngIf="product.category" href="javascript:void(0)" class="category text-primary inline-block mb-5"><h3>{{ product.category | titlecase}}</h3></a>
+        <h1 class="_title font-medium">{{ product.productName}}</h1>
+        <div class="flex p-5">
+          <div class="w-2/12" *ngFor="let item of product.images; let i = index;">
+            <button class="img-preview-btn" style="border: 1px solid transparent;">
+              <img width="100" height="100" src="{{item}}" alt="" (click)="selectImage(i)">
+            </button>
+          </div>
+          <div class="w-10/12">
+          
+            <img class="w-full" [src]="selectedImage" alt="img not found" />
+          </div>
+        </div>
+        
+        
+
+        <div class="ll-content mt-8">
+          <h6>Description:</h6>
+          <p>
+            {{ product.description}}
+          </p>
+        </div>
+      </div>
+      <div class="col-span-12 md:col-span-5 xl:col-span-4">
+        <div class="border">
+          <div class="border-b text-center pt-10 pb-10">
+            <div class="text-accent text-4xl font-semibold">{{ selectedPrice | currency:'USD'}}</div>
+            <div class="font-medium text-lg mt-3 text-gray-400 tracking-wider">Price</div>
+          </div>
+          <div class="border-b p-5">
+            <h5>Sizes:</h5>
+            <ul *ngIf="product.attributes[0]" class="service-info">
+              <li class="py-2" *ngFor="let item of product.attributes[0].prices">
+                <div class="flex items-center">
+                  <div class="button">
+                    <input type="radio" id="a25" name="check-substitution-2" (click)="selectPrice(item)" />
+                    <label class="btn btn-default" for="a25">{{ item.sizeTitle }}</label>
+                  </div>
+                  
+                </div>
+              </li>
+              
+            </ul>
+          </div>
+          <div class="border-b p-5">
+            <div class="flex">
+              <div class="w-full sm:w-1/2sm:mt-0">
+                <h5>Dimensions</h5>
+                <div class="flex mt-2">
+                  <div class="sm:pt-1 mr-3 sm:mr-6 md:mr-8">
+                    <input type="checkbox" class="appearance-none border border-gray-300 checked:bg-gray-400 checked:border-transparent ..." />
+                  </div>
+                  <div class="flex-grow">
+                    <h6 class="text-gray-800">{{size.sizeTitle}}</h6>
+                    <span *ngFor="let s of size.sizes">
+                      
+                      <p class="mt-2">
+                        <b>{{s.sizeType}}</b>: {{s.sizeValue + ' ' + s.sizeUnit}}
+                      </p>
+                    </span>
+            
+                  </div>
+                </div>
+              </div>
+              <div class="w-full sm:w-1/2 mt-4 sm:mt-0">
+                <h5>Quantity</h5>
+                <mat-form-field class="form-element" style="width: 90%;" >
+                  <mat-label for="needOptionsCompose">Quantity</mat-label>
+                  <mat-select matInput required name="quantity" [(ngModel)]="cartItem.quantity" (ngModelChange)="selectQuantity($event)">
+                      <mat-option selected>Select</mat-option>
+                      <mat-option *ngFor="let item of salesForOrderPermits"  [value]="item.unitSale">{{item.unitSale}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+              </div>
+            </div>
+            
+          </div>
+          <div class="border-b px-5 pt-10 pb-12 text-center">
+            <!-- <p class="text-gray-400 mb-4">This price can increase due to additional bookings</p> -->
+            <button mat-flat-button class="py-10 px-20 text-xl font-bold" [className]="isDisabled ? 'cart-btn-disabled' : 'cart-btn'"
+              (click)="openDialog()"><span class="material-icons">shopping_cart</span> {{isDisabled ? 'Please Login':'Add to Cart'}}</button>
+          </div>
+        </div>
+        <!-- <div class="border mt-5 px-5 py-10 text-center">
+          <p class="font-bold mb-3">Do you have any special requirements?</p>
+          <button mat-stroked-button class="py-2 px-12 text-lg font-bold text-gray-700">Send us</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>

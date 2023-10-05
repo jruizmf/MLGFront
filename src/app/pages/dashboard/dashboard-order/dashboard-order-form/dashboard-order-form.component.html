@@ -1,0 +1,180 @@
+<div>
+    <h3 style="color: #00000070; font-weight: 500;">Order Details</h3>
+        <div class="flex flex-wrap">
+            <div class="flex space-x-3 bg-primary rounded-md px-5 py-3 w-full sm:w-1/2" style="background-color: rgb(222, 222, 222); ">
+                <div class="w-16 h-16 rounded-full overflow-hidden shadow-md">
+                    <img [src]="order.user.avatar ? order.user.avatar : 'assets/images/No_image_available.png'" alt="avatar" class="w-full h-full object-cover">
+                </div>
+                <div class="" style="color: #00000070;">
+                    <h5>{{ order.user.fullName}}</h5>
+                    <p class="leading-normal ">
+                        <span class="font-medium">Email</span>: {{ order.user.email }}</p>
+                    <p class="leading-normal ">
+                            <span class="font-medium">Has delivery</span>: {{ order.isDelivery ? 'Yes' : 'No'}}</p>
+                    <p class="leading-normal ">
+                                <span class="font-medium">Has Coupon</span>: {{ order.isHaveCoupon ? 'Yes' : 'No'}}</p>
+                </div>
+            </div>
+            <div class="w-full sm:w-1/2 sm:pl-5 mt-5 mmd:t-0">
+                <p class="mt-1">
+                    <strong>Created:</strong>: {{ order.createdAt | date }}</p>
+                <p class="mt-1" >
+                        <strong>Status:</strong>: <span [ngClass]="{
+							'bg-blue-500 text-blue-500': order?.orderState === 'completed',
+							'bg-red-500 text-red-500': order?.orderState === 'unPaid',
+							'bg-yellow-500 text-yellow-900': order?.orderState === 'pending',
+							'bg-primary text-primary': order?.orderState === 'processing'
+							}" 
+							class="text-[12px] bg-opacity-20 rounded-full px-3 inline-block font-bold py-[3px]"> {{ order.orderState }}</span></p>
+                            <p class="mt-1">
+                                <strong>Discount:</strong>: {{ order.discount | currency:'USD' }}</p>
+                            <p class="mt-1">
+                            <strong>Total:</strong>: {{ order.total | currency:'USD' }}</p>
+            </div>
+        </div>
+    <!-- User Meta Start -->
+	<div class="border bg-white mt-8 rounded-md">
+		<div class="flex p-4 bg-gray-200">
+			<h6 class="text-normal">Order Items</h6>
+		
+		</div>
+		<div *ngIf="order.orderItems != null">
+			<div class="flex flex-wrap p-4"  *ngFor="let item of order.orderItems" >
+				<div class="w-full sm:w-1/2">
+					<div class="ll-dataset">
+                        <div class="w-16 h-16 rounded-full overflow-hidden shadow-md">
+                            <img [src]="item.image ? item.image : 'assets/images/No_image_available.png'" alt="avatar" class="w-full h-full object-cover">
+                        </div>
+                        <div class="pl-5" style="color: #00000070;">
+                            <h5>{{ item.productName | titlecase}}</h5>
+                        </div>
+						<!-- <div class="ll-dataset__label">
+							First Name:
+						</div>
+						<div class="ll-dataset__value">
+							{{ item.firstName }}
+						</div> -->
+					</div>
+					<div class="ll-dataset mt-1">
+						<p class="mt-1">
+                            <strong>Dimensions:</strong>
+							<span *ngFor="let size of item.price.sizes; let i = index;">
+                                {{ size.sizeType | titlecase}}: {{size.sizeValue}} {{size.sizeUnit | titlecase}} {{item.price.sizes.length > (i+1) ? 'X' : ''}}
+                            </span>
+                        </p>
+					</div>
+					
+				</div>
+				<div class="w-full sm:w-1/2 mt-4 sm:mt-0">
+					<div class="ll-dataset">
+						<p class="mt-1">
+							
+                            <strong>Quantity:</strong>
+							{{ item.quantity }}
+                        </p>
+					</div>
+                    <div class="ll-dataset mt-1">
+                        <p class="mt-1">
+							
+                            <strong>Unit Price:</strong>
+							{{ item.price.price | currency:'USD'}}
+                        </p>
+                    </div>
+					<div class="ll-dataset mt-1">
+						<h6 class="mt-1">
+							
+                            <strong>Total:</strong>
+							{{ item.total | currency:'USD'}}
+                        </h6>
+					</div>
+					<div class="ll-dataset mt-1" *ngIf="item.optionComposes">
+                        <a (click)="openDialog()">
+                            View Compose Options
+                        </a>
+                    </div>
+					
+				</div>
+			</div>
+		</div>
+		
+	</div>
+        <!-- User Meta Start -->
+	<div class="border bg-white mt-8 rounded-md" *ngIf="order.isDelivery">
+		<div class="flex p-4 bg-gray-200">
+			<h6 class="text-normal">Shipping addresses</h6>
+		
+		</div>
+		<div *ngIf="order.shippingAddress != null">
+    		<div class="w-full sm:w-1/2">
+				<div class="ll-dataset">
+					<div class="ll-dataset__label">
+						First Name:
+					</div>
+					<div class="ll-dataset__value">
+						{{ order.shippingAddress.firstName }}
+					</div>
+				</div>
+				<div class="ll-dataset mt-4">
+					<div class="ll-dataset__label">
+						Last Name:
+					</div>
+					<div class="ll-dataset__value">
+						{{ order.shippingAddress.lastName }}
+					</div>
+				</div>
+				<div class="ll-dataset mt-4">
+					<div class="ll-dataset__label">
+						Address:
+					</div>
+					<div class="ll-dataset__value">
+						{{ order.shippingAddress.address }}
+					</div>
+				</div>
+				<div class="ll-dataset mt-4">
+					<div class="ll-dataset__label">
+						ZIP Code:
+					</div>
+					<div class="ll-dataset__value">
+						{{ order.shippingAddress.zipCode }}
+					</div>
+				</div>
+			</div>
+			<div class="w-full sm:w-1/2 mt-4 sm:mt-0">
+				<div class="ll-dataset">
+					<div class="ll-dataset__label">
+						Contact Number:
+					</div>
+					<div class="ll-dataset__value">
+						{{ order.shippingAddress.phone }}
+					</div>
+				</div>
+				<div class="ll-dataset mt-4">
+					<div class="ll-dataset__label">
+						City:
+					</div>
+					<div class="ll-dataset__value">
+						{{ order.shippingAddress.city }}
+					</div>
+				</div>
+				<div class="ll-dataset mt-4">
+					<div class="ll-dataset__label">
+						State:
+					</div>
+					<div class="ll-dataset__value">
+						{{ order.shippingAddress.state }}
+					</div>
+				</div>
+				<div class="ll-dataset mt-4">
+					<div class="ll-dataset__label">
+						Price:
+					</div>
+					<div class="ll-dataset__value">
+						{{ order.delivery.price }}
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+<app-compose-options-viewer></app-compose-options-viewer>

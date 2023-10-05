@@ -1,0 +1,71 @@
+
+	<div class="table-inside">
+		<table class="order-table table-auto ltMd:responsive">
+			<thead>
+				<tr class="border text-left">
+					<th>
+						<span class="text-gray-800">Id</span>
+					</th>
+					<th>
+						<span class="text-gray-800">Name</span>
+					</th>
+					<th>
+						<span class="text-gray-800">Price</span>
+					</th>
+	
+					<th>
+						<span class="text-gray-800">Created</span>
+					</th>
+	
+					<th>
+						<span class="text-gray-800">Status</span>
+					</th>
+					<th class="text-right">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let order of orders" class="border">
+					<td>
+						<a class="text-primary" href="/">#{{order?._id}}</a>
+					</td>
+					<td>
+						{{order?.user.fullName | titlecase }}
+					</td>
+					<td>
+						<span>{{order?.total | currency: 'USD'}}</span>
+					</td>
+					<td>
+						<span>{{order?.createdAt | date}}</span>
+					</td>
+					<td>
+						<div [ngClass]="{
+							'bg-blue-500 text-blue-500': order?.orderState === 'completed',
+							'bg-red-500 text-red-500': order?.orderState === 'unPaid',
+							'bg-yellow-500 text-yellow-900': order?.orderState === 'pending',
+							'bg-primary text-primary': order?.orderState === 'processing'
+							}" 
+							class="text-[12px] bg-opacity-20 rounded-full px-3 inline-block font-bold py-[3px]"
+						>
+							{{ order?.orderState | titlecase }}
+						</div>
+					</td>
+					<td class="text-right">
+						<button class="action_icon__btn" mat-icon-button [matMenuTriggerFor]="menu">
+							<mat-icon>more_vert</mat-icon>
+						</button>
+						<mat-menu #menu="matMenu" xposition="before">
+							<a mat-menu-item [routerLink]="linkTo+order._id">
+								<mat-icon>dialpad</mat-icon>
+								<span>Details</span>
+							</a>
+							<!-- <button mat-menu-item>
+								<mat-icon>delete</mat-icon>
+								<span>Cancel</span>
+							</button> -->
+						</mat-menu>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+

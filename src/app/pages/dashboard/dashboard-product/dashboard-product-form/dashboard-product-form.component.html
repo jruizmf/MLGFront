@@ -1,0 +1,53 @@
+<div *ngIf="!isLoading">
+	<!-- User Start -->
+    <form [formGroup]="form"  (ngSubmit)="submit(form)" autocomplete="off">
+        <h3 style="color: #00000070; font-weight: 500;">{{ isEditing ? 'Edit' : "Add"}} Product</h3>
+        <!-- User Meta Start -->
+        <div class="border bg-white mt-8 rounded-md">
+            <div class="flex flex-wrap p-4">
+                <div class="w-full sm:w-1/2 mt-4 sm:mt-0">
+                    <div class="ll-dataset">
+                        <mat-form-field class="form-element" style="width: 70%;">
+                            <mat-label>Codigo:</mat-label>
+                            <input matInput [type]="'text'" placeholder="Código de producto" formControlName="codigo">
+                          </mat-form-field>
+                    </div>
+            
+                    <div class="ll-dataset mt-4">
+                        <mat-form-field class="form-element" style="width: 70%;">
+                            <mat-label>Descripción:</mat-label>
+                            <input matInput [type]="'text'" placeholder="Descripción" formControlName="descripcion">
+                          </mat-form-field>
+                    </div>
+                  
+                    <div class="ll-dataset mt-4">
+                        <mat-form-field class="form-element" style="width: 70%;">
+                            <mat-label>Precio:</mat-label>
+                            <input matInput [type]="'text'" placeholder="Precio" formControlName="precio">
+                          </mat-form-field>
+                    </div>
+                    <div class="ll-dataset mt-4">
+                        <mat-form-field class="form-element" style="width: 70%;">
+                            <mat-label>Stock:</mat-label>
+                            <input matInput [type]="'number'" placeholder="Stock" formControlName="stock">
+                          </mat-form-field>
+                    </div>
+                </div>
+                <div class="w-full sm:w-1/2">
+                    
+                     <div class="ll-dataset">
+                        <app-uploader *ngIf="!isLoading" [images]="articulo.imagen" [limit]="1" (eventEmited)="addImages($event)" ></app-uploader>
+                    </div>
+                    <div class="ll-dataset">
+                    
+                        <button mat-raised-button color="info" type="submit" style="color: rgb(0, 196, 55); border: 1px solid rgb(0, 196, 55); background-color: #FFFFFF;" >Save changes </button>
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </form>
+</div>
+<ll-loader [center]="true"></ll-loader>

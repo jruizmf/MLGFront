@@ -1,0 +1,95 @@
+<div>
+	<!-- User Start -->
+    <form  autocomplete="off">
+        <h3 style="color: #00000070; font-weight: 500;">{{isEditing ? "Modificar" : "Agregar"}} Usuario</h3>
+        <div class="flex flex-wrap">
+            <div class="flex space-x-3 bg-primary rounded-md px-5 py-3 w-full sm:w-1/2" style="background-color: rgb(222, 222, 222); ">
+                <div class="w-16 h-16 rounded-full overflow-hidden shadow-md">
+                    <img [src]="'assets/images/No_image_available.png'" alt="avatar" class="w-full h-full object-cover">
+                </div>
+                <div class="" style="color: #00000070;">
+                    <h5>{{ usuario.nombre}} {{ usuario.apellidos}}</h5>
+                    <p class="leading-normal ">
+                        <span class="font-medium">Usuario</span>: {{ usuario.usuarioNombre }}</p>
+                </div>
+            </div>
+            
+        </div>
+        <!-- User End -->
+        <!-- User Meta Start -->
+        <div class="border bg-white mt-8 rounded-md">
+            <div class="flex p-4 bg-gray-200">
+                <h6 class="text-normal">Datos Generales</h6>
+            </div>
+            <div class="flex flex-wrap p-4">
+                <div class="w-full sm:w-1/2 mt-4 sm:mt-0">
+                    
+                    <div class="ll-dataset">
+                        <mat-form-field style="width: 80%;">
+                            <mat-label>Nombre:</mat-label>
+                            <input matInput type="text" [(ngModel)]="usuario.nombre" name="nombre" placeholder="Nombre">
+                            <mat-icon matSuffix>people</mat-icon>
+                            <mat-hint>Ingrese nombre</mat-hint>
+                       </mat-form-field>
+                    </div>
+                    <div class="ll-dataset">
+                        <mat-form-field style="width: 80%;">
+                            <mat-label>Apellidos:</mat-label>
+                            <input matInput type="text" [(ngModel)]="usuario.apellidos" name="apellidos" placeholder="Apellidos">
+                            <mat-icon matSuffix>article</mat-icon>
+                            <mat-hint>Ingrese apellidos</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="ll-dataset" *ngIf="!isEditing">
+                        <mat-form-field style="width: 80%;">
+                            <mat-label>Contraseña:</mat-label>
+                            <input matInput type="password" [(ngModel)]="usuario.password" name="nombre" placeholder="Nombre">
+                            <mat-icon matSuffix>key</mat-icon>
+                            <mat-hint>Ingrese contraseña</mat-hint>
+                       </mat-form-field>
+                    </div>
+                    <div class="ll-dataset" *ngIf="!isEditing">
+                        <mat-form-field style="width: 80%;">
+                            <mat-label>Confirmar Contraseña:</mat-label>
+                            <input matInput type="password" [(ngModel)]="confirmarContrasena" name="confirmarContraseña" placeholder="Confirmar Contraseña">
+                            <mat-icon matSuffix>key</mat-icon>
+                            <mat-hint>Confirme contraseña</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="ll-dataset mt-4" *ngIf="isEditing">
+                        <div class="p-5" style="text-align: end;">
+                            <button mat-raised-button color="info" type="button"  style="color: rgb(0, 204, 58); border: 1px solid rgb(0, 204, 58); background-color: #FFFFFF;" (click)="openDialog()"><mat-icon>key</mat-icon>Modificar contraseña</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full sm:w-1/2 mt-4 sm:mt-0">
+                   
+                    <div class="ll-dataset">
+                        <mat-form-field style="width: 80%;">
+                            <mat-label>Dirección:</mat-label>
+                            <input matInput type="nombre" [(ngModel)]="usuario.direccion" name="direccion" placeholder="Domicilio">
+                            <mat-icon matSuffix>store</mat-icon>
+                            <mat-hint>Ingrese Dirección</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="ll-dataset mt-4">
+                        <mat-form-field style="width: 80%;">
+                            <mat-label>Usuario:</mat-label>
+                            <input matInput type="text" [(ngModel)]="usuario.usuarioNombre" name="usuarioNombre" placeholder="Nombre de Usuario">
+                            <mat-icon matSuffix>people</mat-icon>
+                            <mat-hint>Ingrese nombre de usuario</mat-hint>
+                        </mat-form-field>
+                    </div>
+                     
+                </div>
+ 
+            </div>
+        </div>
+        <!-- User Meta End -->
+        <!-- User Meta Start -->
+        <div class="p-5" style="text-align: end;">
+            <button mat-raised-button color="info" type="button" style="color: rgb(4, 255, 75); border: 1px solid rgb(4, 255, 75); background-color: #FFFFFF;" (click)="save()">Save changes </button>
+        </div>
+	<!-- User Meta End -->
+    </form>
+</div>

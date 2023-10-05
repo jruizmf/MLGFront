@@ -1,0 +1,116 @@
+<!-- ============== SECTION PAGETOP ============== -->
+<section class="mt-10 py-20">
+   
+    <div class="container">
+    
+    <!-- =================== COMPONENT CART+SUMMARY ====================== -->
+        <div class="grid grid-cols-12 gap-4 lg:gap-8">
+            <div class="col-span-10 md:col-span-8 p-4" >
+                
+                <mat-card class="p-6" >
+                    <h4 class="card-title mb-4">Your shopping cart</h4>
+                    <div *ngFor="let item of cartItems; let i = index;">
+                        <mat-card-content>
+                            <div class="grid grid-cols-12 gap-4 lg:gap-8 gy-3 mb-4">
+                                <div class="col-span-5 md:col-span-5"><span>Product</span></div>
+                                <div class="col-span-2 md:col-span-2"><span>Quantity</span></div>
+                                <div class="col-span-2 md:col-span-2"><span>Price</span></div>
+                                <div class="col-span-3 md:col-span-3"><span>Remove</span></div>
+                            </div>
+                            
+                            <article class="grid grid-cols-12 gap-4 lg:gap-8 gy-3 mb-4">
+                                <div class="col-span-5 md:col-span-5">
+                                    <figure class="itemside me-lg-5">
+                                        <div class="aside"><img width="120px" [src]="item.image ?  item.image : './../../../assets/images/No_image_available.png'" class="img-sm img-thumbnail"></div>
+                                        <figcaption class="info">
+                                            <a href="#" class="title">{{ item.productName | titlecase}}</a>
+                                            <!-- <p class="text-muted"> Blue, Medium </p> -->
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col-span-2 md:col-span-2">
+                                    <select style="width: 100px; border-bottom: 1px solid #00000070;" class="form-select" [(ngModel)]="itemQuantity[i]" (ngModelChange)="calculateTotals($event, i)" >
+                                        <option value="1" selected>1</option>
+                                        <option value="2">2</option>  
+                                        <option value="3">3</option>  
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>  
+                                        <option value="6">6</option>  
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>  
+                                        <option value="9">9</option>  
+                                        <option value="10">10</option>  
+                                    </select> 
+                                </div>
+                                <div class="col-span-2 md:col-span-2">
+                                    <div class="price-wrap lh-sm"> 
+                                        <var class="price h6">{{ itemTotal[i] | currency: 'USD'}}</var>  <br>
+                                         <small class="text-muted"> {{(item.total) | currency: 'USD'}} / per item </small> 
+                                    </div> <!-- price-wrap .// -->
+                                </div>
+                                <div class="col-span-3 md:col-span-3">
+                                    <div class="pl-5">
+                                        <a href="#" class="btn btn-light"> <i class="fa fa-heart"></i></a> 
+                                        <button type="button" class="btn btn-light text-danger" style="color: red;" (click)="removeItem(i)"> <mat-icon color="danger">remove_circle_outline</mat-icon></button>
+                                    </div>
+                                </div>
+                            </article> <!-- row.// -->
+        
+                        </mat-card-content>
+                    </div>
+                </mat-card><!-- card.// -->
+    
+            </div> <!-- col.// -->
+            <mat-card class="col-span-2 md:col-span-4 p-4" >
+                <mat-card-content >
+                    <!-- <form>
+                        <div class="form-group">
+                            <label class="form-label">Have coupon?</label>
+                            <div class="input-group">
+                            <input type="text" class="form-control" name="" placeholder="Coupon code">
+                            <button class="btn btn-light">Apply</button>
+                            </div>
+                        </div>
+                    </form> -->
+                
+                    <div class="card">
+                        <div class="card-body">
+                            <dl class="dlist-align">
+                                <dt>Total price:</dt>
+                                <dd class="text-end"> {{total.price | currency:'USD'}}</dd>
+                            </dl>
+                            <dl class="dlist-align">
+                                <dt>Discount:</dt>
+                                <dd class="text-end text-success">- {{total.discount | currency:'USD' }} </dd>
+                            </dl>
+                            <dl class="dlist-align">
+                                <dt>TAX:</dt>
+                                <dd class="text-end"> {{total.tax | currency:'USD'}}</dd>
+                            </dl>
+                            <hr>
+                            <dl class="dlist-align">
+                                <dt>Total:</dt>
+                                <dd class="text-end text-dark h5"> {{total.total }} </dd>
+                            </dl>
+                            
+                            <div class="d-grid gap-2 my-3">
+                                <a mat-stroked-button color="primary"routerLink="product" class="btn btn-light w-100"> Back to shop </a>
+                                <button mat-stroked-button color="accent"
+                                (click)="createOrder()" class="mx-10"> Make Purchase </button>
+                                
+                            </div>
+                        </div>
+                    </div> <!-- card-body.// -->
+                </mat-card-content>
+	
+            </mat-card><!-- col.// -->
+        
+        </div> <!-- row.// -->
+    <!-- =================== COMPONENT 1 CART+SUMMARY .//END  ====================== -->
+    
+    <br><br>
+    
+    </div> <!-- container .//  -->
+</section>
+    
+    

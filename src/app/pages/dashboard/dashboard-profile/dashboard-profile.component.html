@@ -1,0 +1,43 @@
+<div>
+	<!-- User Start -->
+	<div class="flex flex-wrap">
+		<div class="flex space-x-3 bg-primary rounded-md px-5 py-3 w-full sm:w-1/2" style="color: #00000070 !important; ">
+			<div class="w-16 h-16 rounded-full overflow-hidden shadow-md">
+				<img [src]="'assets/images/No_image_available.png'" alt="profile" class="w-full h-full object-cover">
+			</div>
+			<div>
+				<h5>{{ user.nombre}} {{ user.apellidos}}</h5>
+				<p class="leading-normal">
+					<span class="font-medium">Usuario</span>: {{ user.usuarioNombre}}</p>
+			</div>
+		</div>
+		<div class="w-full sm:w-1/2 sm:pl-5 mt-5 mmd:t-0">
+		</div>
+	</div>
+	<!-- User End -->
+	<!-- User Meta Start -->
+	<div class="border bg-white mt-8 rounded-md">
+		<div class="flex p-4 bg-gray-200">
+			<h6 class="text-normal">Información</h6>
+			
+		</div>
+		<div class="flex flex-wrap p-4">
+			<div class="w-full sm:w-1/2">
+				
+				<div class="ll-dataset mt-4">
+					<div class="ll-dataset__label">
+						Direccion:
+					</div>
+					<div class="ll-dataset__value">
+						{{ user.direccion }}
+					</div>
+				</div>
+			</div>
+			<div class="w-full sm:w-1/2 mt-4 sm:mt-0">
+				
+			</div>
+		</div>
+		
+	</div>
+	<!-- User Meta End -->
+</div>
