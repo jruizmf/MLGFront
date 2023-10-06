@@ -14,10 +14,10 @@ export class DashboardSavedItemComponent implements OnInit {
   orders: IArticuloCliente[]  = [];
   constructor(private _ClienteArticulo: ClienteArticuloService) {}
   ngOnInit(): void {
-    this.getAll()
+    this.obtenerTodo()
   }
 
-  async  getAll(){
+  async  obtenerTodo(){
     await this._ClienteArticulo.getUser({}).then((x: IArticuloCliente[]) => {
       console.log(x)
       this.orders = x;

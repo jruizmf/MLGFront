@@ -18,10 +18,10 @@ export class DashboardProductComponent  implements OnInit {
   constructor(private _articuloService : ArticulosService, private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.getAll();
+    this.obtenerTodo();
   }
-  async  getAll(){
-    await this._articuloService.getAll({}).then((x: any[]) => {
+  async  obtenerTodo(){
+    await this._articuloService.obtenerTodo({}).then((x: any[]) => {
       console.log(x)
       this.articulos = x;
     })

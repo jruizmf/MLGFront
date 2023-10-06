@@ -7,14 +7,14 @@
 						<span class="text-gray-800">Id</span>
 					</th>
 					<th>
-						<span class="text-gray-800">Name</span>
+						<span class="text-gray-800">Producto</span>
 					</th>
 					<th>
-						<span class="text-gray-800">Price</span>
+						<span class="text-gray-800">Total</span>
 					</th>
 	
 					<th>
-						<span class="text-gray-800">Created</span>
+						<span class="text-gray-800">Cliente</span>
 					</th>
 	
 					<th>
@@ -24,29 +24,24 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let order of orders" class="border">
+				<tr *ngFor="let articulo of ordenes" class="border">
 					<td>
-						<a class="text-primary" href="/">#{{order?._id}}</a>
+						<a class="text-primary" href="/">#{{articulo._id}}</a>
 					</td>
 					<td>
-						{{order?.user.fullName | titlecase }}
+						{{articulo?.articulo.descripcion | titlecase }}
 					</td>
 					<td>
-						<span>{{order?.total | currency: 'USD'}}</span>
+						<span>{{articulo?.total | currency: 'USD'}}</span>
 					</td>
 					<td>
-						<span>{{order?.createdAt | date}}</span>
+						<span>{{articulo?.cliente.nombre | date}}</span>
 					</td>
 					<td>
-						<div [ngClass]="{
-							'bg-blue-500 text-blue-500': order?.orderState === 'completed',
-							'bg-red-500 text-red-500': order?.orderState === 'unPaid',
-							'bg-yellow-500 text-yellow-900': order?.orderState === 'pending',
-							'bg-primary text-primary': order?.orderState === 'processing'
-							}" 
+						<div class="bg-blue-500 text-blue-500 completed" 
 							class="text-[12px] bg-opacity-20 rounded-full px-3 inline-block font-bold py-[3px]"
 						>
-							{{ order?.orderState | titlecase }}
+							Activo
 						</div>
 					</td>
 					<td class="text-right">
@@ -54,9 +49,9 @@
 							<mat-icon>more_vert</mat-icon>
 						</button>
 						<mat-menu #menu="matMenu" xposition="before">
-							<a mat-menu-item [routerLink]="linkTo+order._id">
+							<a mat-menu-item [routerLink]="linkTo+articulo.id">
 								<mat-icon>dialpad</mat-icon>
-								<span>Details</span>
+								<span>detalle</span>
 							</a>
 							<!-- <button mat-menu-item>
 								<mat-icon>delete</mat-icon>

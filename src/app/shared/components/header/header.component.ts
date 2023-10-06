@@ -47,8 +47,8 @@ export class HeaderComponent implements OnInit {
 
   goToCart():void{
     if (this.cartCount == 0) {
-      Swal.fire("Redirecting warning!", "There is no items in cart, redirecting to Products...", "warning")
-      this.router.navigate(['products']);
+      Swal.fire("Redireccionando!", "No hay articulos en el carrito, Redireccionando...", "warning")
+      this.router.navigate(['articulos']);
     } else {
       this.router.navigate(['cart']);
     }

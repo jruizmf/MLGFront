@@ -13,12 +13,12 @@ export class ProductListComponent implements OnInit {
   articulos: any = [];
   imageUrl = environment.filesPath;
   constructor(private _articuloService : ArticulosService) {
-    this.getAll();
+    this.obtenerTodo();
   }
 
 
-  async  getAll(){
-    await this._articuloService.getAll({}).then((x: any[]) => {
+  async  obtenerTodo(){
+    await this._articuloService.obtenerTodo({}).then((x: any[]) => {
       this.articulos = x;
     })
   }

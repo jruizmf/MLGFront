@@ -13,7 +13,7 @@ export class UsuarioClienteService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(filter: any): any {
+  obtenerTodo(filter: any): any {
     return this.http.get<any>(`${USUARIO_CLIENTE_API}`,  filter ).toPromise()
     .then((res: any) => {
       return res

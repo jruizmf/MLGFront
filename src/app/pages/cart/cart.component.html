@@ -29,16 +29,8 @@
                                 </div>
                                 <div class="col-span-2 md:col-span-2">
                                     <select style="width: 100px; border-bottom: 1px solid #00000070;" class="form-select" [(ngModel)]="cantidadEnProducto[i]" (ngModelChange)="calculateTotals($event, i)" >
-                                        <option value="1" selected>1</option>
-                                        <option value="2">2</option>  
-                                        <option value="3">3</option>  
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>  
-                                        <option value="6">6</option>  
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>  
-                                        <option value="9">9</option>  
-                                        <option value="10">10</option>  
+                                        <option *ngFor="let n of [0,1,2,3,4,5,6]; let it = index;"  [value]="cantidadEnProducto[n]"  selected>{{cantidadEnProducto[n]}}</option>
+                                  
                                     </select> 
                                 </div>
                                 <div class="col-span-2 md:col-span-2">
@@ -65,22 +57,22 @@
                 
                     <div class="card">
                         <div class="card-body">
-                            <dl class="dlist-align">
+                            <dl class="dlist-align py-5">
                                 <dt>Total de compra:</dt>
-                                <dd class="text-end"> {{total.price | currency:'MXN'}}</dd>
+                                <dd class="text-end"> {{total.precio | currency:'MXN'}}</dd>
                             </dl>
-                            <dl class="dlist-align">
+                            <dl class="dlist-align py-5">
                                 <dt>Impuesto:</dt>
-                                <dd class="text-end"> {{total.tax | currency:'MXN'}}</dd>
+                                <dd class="text-end"> {{total.impuesto | currency:'MXN'}}</dd>
                             </dl>
                             <hr>
-                            <dl class="dlist-align">
+                            <dl class="dlist-align py-5">
                                 <dt>Total:</dt>
-                                <dd class="text-end text-dark h5"> {{total.total }} </dd>
+                                <dd class="text-end text-dark h5"> {{total.total | currency:'MXN'}} </dd>
                             </dl>
                             
                             <div class="d-grid gap-2 my-3">
-                                <a mat-stroked-button color="primary"routerLink="product" class="btn btn-light w-100"> Back to shop </a>
+                                <a mat-stroked-button color="primary"routerLink="product" class="btn btn-light w-100"> Volver a articulos </a>
                                 <button mat-stroked-button color="accent"
                                 (click)="createOrder()" class="mx-10">Crear Orden</button>
                                 

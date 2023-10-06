@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { IArticuloCliente } from '../models/articuloCliente';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
-const ORDER_API = 'http://localhost:44377/api/Ordenes/';
+const ORDER_API = environment.apiPath+'ClienteArticulo/';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ClienteArticuloService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(filter: any): any {
+  obtenerTodo(filter: any): any {
     return this.http.get<any>(`${ORDER_API}`,  filter ).toPromise()
     .then((res: any) => {
       return res
@@ -20,7 +21,7 @@ export class ClienteArticuloService {
   }
 
   findByTerm(term: string): any {
-    return this.http.get<any>(`http://localhost:44377/api/ordenes/${term}` ).toPromise()
+    return this.http.get<any>(`http://localhost:44377/api/ClienteArticulo/${term}` ).toPromise()
     .then((res: any) => {
       return res
     });

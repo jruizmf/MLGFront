@@ -5,7 +5,7 @@
       <h4 class="ll-section-head__subheading">Inicia sesión para continuar</h4>
     </div>
     <div class="grid grid-cols-12 gap-6 xxl:gap-8">
-      <div *ngFor="let articulo of Articulos" class="col-span-12 md:col-span-6 xl:col-span-4">
+      <div *ngFor="let articulo of articulos" class="col-span-12 md:col-span-6 xl:col-span-4">
         <mat-card class="ll-product">
           <img mat-card-image [src]="articulo?.imagen ?  imageUrl +articulo?.imagen  : 'assets/images/No_image_available.png'" alt="{{ articulo.codigo }}"
            style="width: 100%; margin: 0 0 20px; width: 482px; height: 241px;" />

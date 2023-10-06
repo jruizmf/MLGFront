@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./order-list.component.scss']
 })
 export class OrderListComponent {
- @Input() orders: any[] = [];
+ @Input() ordenes: any[] = [];
  @Input() linkTo: string = '';
   constructor() {}
 

@@ -29,14 +29,11 @@ export class ProductDetailsComponent implements OnInit {
   articulo: any;
   imageUrl : string = environment.filesPath;
   slug: any;
-  size: any;
-  salesForOrderPermits: any[] = [];
-  salesForOrderPermit: any | undefined;
-  selectedPrice:number;
+  
   selectedImage: string = 'assets/images/No_image_available.png';
 
   constructor(private _articulosService: ArticulosService, private router: Router, private _cartService: CartService, private _fileService: FileService, private route : ActivatedRoute, private _authService: AuthService, private dialog: MatDialog) { 
-    this.selectedPrice = 0
+  
     this.slug = this.route.snapshot.paramMap.get('slug')
     this.cartItem = {
       productId: "",
@@ -72,7 +69,6 @@ export class ProductDetailsComponent implements OnInit {
   }
   
   selectSalesForOrderPermit(item: any){
-    this.salesForOrderPermit = item;
     this.cartItem.quantity = item.unitSale;
   }
   uploadImages(): void {
@@ -80,23 +76,7 @@ export class ProductDetailsComponent implements OnInit {
 
   }
 
-  selectQuantity(event:any){
-    let selected = this.salesForOrderPermits.find(x=> x.unitSale == event);
-   
-    let role =  this._authService.getRole() as string
-
-    let decrement = 0;
-    if(role == "client"){
-      decrement = selected.decrementClient;
-    }else if(role == "frequent"){
-      decrement = selected.decrementFrequent;
-    }else if(role == "federal"){
-      decrement = selected.decrementFederal;
-    }else{
-      decrement = selected.decrementFederal;
-    }
-    
-   this.selectedPrice = this.selectedPrice - decrement;
+  selectQuantity(event:any){;
     this.cartItem.quantity = event;
   }
   openDialog(): void {
@@ -106,13 +86,13 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     this.cartItem = {
-      productId: this.articulo._id,
-      productName: this.articulo.productName,
-      slug: this.articulo.slug,
+      productId: this.articulo.id,
+      productName: this.articulo.descripcion,
+      code: this.articulo.codigo,
       image: this.articulo.imagen,
       price: this.articulo.precio,
       quantity: this.cartItem.quantity,
-      total: this.selectedPrice
+      total: this.articulo.precio * this.cartItem.quantity
     }
 
   

@@ -15,11 +15,11 @@ export class UserComponent implements OnInit {
   constructor(private _usuarioService: UsuarioClienteService) {}
   
   ngOnInit(): void {
-    this.getAll()
+    this.obtenerTodo()
   }
 
-  async  getAll(){
-    await this._usuarioService.getAll({}).then((x: IUsuarioCliente[]) => {
+  async  obtenerTodo(){
+    await this._usuarioService.obtenerTodo({}).then((x: IUsuarioCliente[]) => {
       console.log(x)
       this.usuarios = x;
     })

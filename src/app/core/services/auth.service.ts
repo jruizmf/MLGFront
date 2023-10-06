@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 import { IAuthDto } from '../models/dto/IAuth';
 import { IUsuario } from '../models/usuario';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 const IAuthDto_API = 'https://localhost:44377/api/Auth/';
@@ -32,10 +33,14 @@ export class AuthService {
   }
 
   logout():void {
+   
+    Swal.fire("Cerrando sesion")
     localStorage.removeItem('user');
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
+    localStorage.removeItem('cart');
     this.router.navigate(['/']);
   }
+
   getUser():IUsuario{
     let user: IUsuario = {}
     if(typeof localStorage.getItem('user') == 'string'){

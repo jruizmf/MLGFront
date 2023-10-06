@@ -21,16 +21,16 @@ export class CartComponent {
     impuesto:0,
     total:0,
   }
-  constructor(private router: Router, private _cartService: CartService, private _articuloService: ClienteArticuloService) {
+  constructor(private router: Router, private _cartService: CartService, private _ordenService: ClienteArticuloService) {
     let cartString  = localStorage.getItem('cart')
     if(cartString != null){
       let cart = JSON.parse(localStorage.getItem('cart') || '{}');
-
       cart.items.forEach((item: any, index:number) => {
+
         this.totalProducto[index] = item.total
         this.cantidadEnProducto[index] = 1;
         this.total.precio = this.total.precio + item.total
-        this.total.impuesto = (this.total.price * .15);
+        this.total.impuesto = (this.total.precio * .15);
         this.total.total = this.total.precio + this.total.impuesto
       });
       this.carritoCompras =   cart.items
@@ -46,9 +46,9 @@ export class CartComponent {
       this.totalProducto[i] = this.carritoCompras[i].total * this.cantidadEnProducto[i];
     cart.items.forEach((item: any, index:number) => {
       this.cantidadEnProducto[index] = 1;
-      this.total.price = this.total.price + (item.total * this.cantidadEnProducto[index])
-      this.total.tax = (this.total.price * .15);
-      this.total.total = this.total.price + this.total.tax
+      this.total.precio = this.total.precio + (item.total * this.cantidadEnProducto[index])
+      this.total.impuesto = (this.total.precio * .15);
+      this.total.total = this.total.precio + this.total.impuesto
     });
   }
   createOrder():void{
@@ -60,19 +60,27 @@ export class CartComponent {
       confirmButtonText: 'Si, realizar!',
       cancelButtonText: 'No'
     }).then((result) => {
+      let usuario = JSON.parse(localStorage.getItem('user') || '{}');
+
       if (result.value) {
-        let order: IArticuloCliente = {
-          articuloId: "",
-          clienteId: "",
+       
+      this.carritoCompras.forEach((c) => {
+        let orden: IArticuloCliente = {
+          articuloId: c.productId,
+          cantidad: c.quantity,
+          clienteId: usuario.cliente.clienteId,      
           fecha: new Date
       }
-        this._articuloService.save(order).subscribe((x:any) => {
+      
+        this._ordenService.save(orden).subscribe((res:any) => {
+          console.log(res)
+
           Swal.fire("Articulo", "El Articulo se agregó exitosamente...", "success")
             localStorage.removeItem('cart')
             this.carritoCompras = []
             this.router.navigate(['articulos']);
         })
-
+      }) 
 
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(

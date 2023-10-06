@@ -12,7 +12,7 @@ export class ArticulosService {
 
   constructor(private http: HttpClient) { }
   
-  getAll(filter: any): any {
+  obtenerTodo(filter: any): any {
     return this.http.get<any>(`${PRODUCT_API}` ).toPromise()
     .then((res: any) => {
       return res

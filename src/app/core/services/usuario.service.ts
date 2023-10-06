@@ -20,7 +20,7 @@ export class UsuarioService {
 
   }
 
-  getAll(filter: any): any {
+  obtenerTodo(filter: any): any {
     return this.http.get<any>(`${USER_API}`,  filter ).toPromise()
     .then((res: any) => {
       return res
