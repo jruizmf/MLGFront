@@ -6,7 +6,7 @@ import { StoreAddressRoutingModule } from './store-address-routing.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { MatMenuModule } from '@angular/material/menu';
 import { StoreAddressFormComponent } from './store-address-form/store-address-form.component';
-import { StoreAddProductComponent } from './components/password-editor/store-add-product.component';
+import { StoreAddProductComponent } from './components/store-add-product/store-add-product.component';
 
 @NgModule({
   declarations: [

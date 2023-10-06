@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { TiendaService } from 'src/app/core/services/tienda.service';
 import { MatDialog } from '@angular/material/dialog';
-import { StoreAddProductComponent } from './components/password-editor/store-add-product.component';
+import { StoreAddProductComponent } from './components/store-add-product/store-add-product.component';
 
 
 
