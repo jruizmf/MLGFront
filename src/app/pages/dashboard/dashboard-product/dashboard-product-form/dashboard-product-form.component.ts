@@ -118,7 +118,7 @@ export class DashboardProductFormComponent {
       stock:Number(this.form.value.stock),
       imagen: ""
     }
-    console.log(this.imagen)
+    
     if(this.imagen != null){
       this._uploadService.upload(this.imagen).then((res: any) => {
         this.articulo.imagen = res;

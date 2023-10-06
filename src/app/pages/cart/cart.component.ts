@@ -73,7 +73,7 @@ export class CartComponent {
       }
       
         this._ordenService.guardar(orden).subscribe((res:any) => {
-          console.log(res)
+  
 
           Swal.fire("Articulo", "El Articulo se agregó exitosamente...", "success")
             localStorage.removeItem('cart')

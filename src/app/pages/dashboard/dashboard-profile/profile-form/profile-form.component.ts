@@ -36,7 +36,6 @@ export class ProfileFormComponent implements OnInit {
 
   constructor(private _usuarioService: UsuarioClienteService, private _usuarioClienteService: UsuarioClienteService, private dialog: MatDialog,  private router: Router, private route : ActivatedRoute) { 
     this.userID = this.route.snapshot.paramMap.get('term')
-    console.log(this.userID)
     if (this.userID == null) {
       this.isEditing = false
     } else{
@@ -56,7 +55,6 @@ export class ProfileFormComponent implements OnInit {
 
   ngOnInit(): void {
     this._usuarioService.buscarUno(this.userID).then((res:any) => {
-      console.log(res)
       this.usuario = {
         usuarioId: res.usuario.Id,
           usuarioNombre: res.usuario.usuarioNombre,
@@ -79,9 +77,7 @@ export class ProfileFormComponent implements OnInit {
     let _usuario: IUsuarioDto = this.getUserForm()
 
       if (this.isEditing) {
-        console.log(_usuario)
         this._usuarioService.actualizar(this.userID, _usuario).subscribe( () => {
-          console.log("Update")
           Swal.fire('Actualización de Perfil..', 'Perfil modificado exitosamente!', 'success')
           this.router.navigate(['dashboard/usuarios']);
           }, (error: any) => {

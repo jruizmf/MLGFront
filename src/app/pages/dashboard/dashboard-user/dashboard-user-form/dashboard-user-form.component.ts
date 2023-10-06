@@ -35,7 +35,7 @@ export class DashboardUserFormComponent {
 
   constructor(private _usuarioService: UsuarioClienteService, private _usuarioClienteService: UsuarioClienteService, private dialog: MatDialog,  private router: Router, private route : ActivatedRoute) { 
     this.userID = this.route.snapshot.paramMap.get('term')
-    console.log(this.userID)
+
     if (this.userID == null) {
       this.isEditing = false
     } else{
@@ -55,7 +55,7 @@ export class DashboardUserFormComponent {
 
   ngOnInit(): void {
     this._usuarioService.buscarUno(this.userID).then((res:any) => {
-      console.log(res)
+
       this.usuario = {
         usuarioId: res.usuario.Id,
           usuarioNombre: res.usuario.usuarioNombre,
@@ -78,14 +78,11 @@ export class DashboardUserFormComponent {
     let _usuario: IUsuarioDto = this.getUserForm()
 
       if (this.isEditing) {
-        console.log(_usuario)
+
         this._usuarioService.actualizar(this.userID, _usuario).subscribe( () => {
-          console.log("Update")
           Swal.fire('Actualización de usuario..', 'Usuario modificado exitosamente!', 'success')
           this.router.navigate(['dashboard/usuarios']);
           }, (error: any) => {
-            console.log("error")
-            console.log(error)
             Swal.fire('Algo Salió mal..', 'Por favor intente de nuevo!', 'error')
           }
         );      
@@ -96,7 +93,6 @@ export class DashboardUserFormComponent {
             this.form.disable();
             this.router.navigate(['dashboard/usuarios']);
             }, (error) => {
-              console.log(error)
               Swal.fire('Algo Salió mal..', 'Por favor intente de nuevo!', 'error')
             }
           );

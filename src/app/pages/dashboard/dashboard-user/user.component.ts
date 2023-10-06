@@ -20,7 +20,6 @@ export class UserComponent implements OnInit {
 
   async  obtenerTodo(){
     await this._usuarioService.obtenerTodo({}).then((x: IUsuarioCliente[]) => {
-      console.log(x)
       this.usuarios = x;
     })
   }
@@ -28,7 +27,6 @@ export class UserComponent implements OnInit {
     this._usuarioService.eliminar(_id).subscribe( (res) => {
       window.location.reload();
       }, (error) => {
-        console.log()
         Swal.fire('Algo salió mal..', 'Favor de contactar a su administrador!', 'error')
       }
     )

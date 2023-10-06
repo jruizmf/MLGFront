@@ -22,7 +22,6 @@ export class DashboardSavedItemComponent implements OnInit {
   async  obtenerTodo(){
     let usuario = JSON.parse(localStorage.getItem('user') || '{}');
     await this._ordenService.buscarPorUsuario(usuario.cliente.clienteId).then((x: any[]) => {
-      console.log(x)
       this.ordenes = x;
     })
   }

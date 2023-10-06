@@ -31,7 +31,6 @@ export class UploadImageComponent implements OnInit  {
   }
 
   onFileDropped($event: any) {
-    console.log($event)
     this.prepareFilesList($event);
   }
 

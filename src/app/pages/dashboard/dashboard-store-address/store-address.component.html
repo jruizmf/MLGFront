@@ -37,6 +37,10 @@
                     <mat-icon>more_vert</mat-icon>
                   </button>
                   <mat-menu #menu="matMenu" xposition="before">
+                    <a mat-menu-item [routerLink]="'articulos/'+tienda.id">
+                        <mat-icon>dialpad</mat-icon>
+                        <span>Ver Articulos</span>
+                      </a>
                     <button mat-menu-item type="button" (click)="abrirModal(tienda.id!)">
                         <mat-icon>add</mat-icon>
                         <span>Agregar Productos</span>

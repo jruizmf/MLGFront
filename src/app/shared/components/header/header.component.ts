@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
   subscription: Subscription;
   constructor(private breakpointObserver: BreakpointObserver, public auth: AuthService, public _articuloService: ArticulosService,  private _cartService: CartService, private router: Router) {
       this.subscription = this._cartService.getNumber().subscribe((x:any) => {
-        console.log(x)
+  
         this.cartCount = x;
       })
   }

@@ -20,8 +20,7 @@ export class DashboardProfileComponent implements OnInit {
 
   constructor(private _usuarioService: UsuarioClienteService, private _auth: AuthService) { 
     this.user = this._auth.getUser();
-    console.log("this.user")
-    console.log(this.user)
+
     this._usuarioService.buscarUno(this.user.id!).then((res:any) => {
       this.usuario = res;
     })

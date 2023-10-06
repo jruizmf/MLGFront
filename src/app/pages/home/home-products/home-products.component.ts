@@ -21,7 +21,6 @@ export class HomeProductsComponent implements OnInit {
 
   async  obtenerTodo(){
     await this._articuloService.obtenerTodo({}).then((x: any[]) => {
-      console.log(x)
       this.articulos = x;
     })
   }

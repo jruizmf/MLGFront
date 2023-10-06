@@ -34,7 +34,7 @@ export class StoreAddProductComponent {
 
   ngOnInit(){
     this._articuloService.obtenerTodo({}).then((a:any) =>{
-      this.productos = a;
+      this.productos = a.articulo;
     });
   }
 
@@ -43,7 +43,6 @@ export class StoreAddProductComponent {
     }
   
     submit():void {
-      console.log(this.tiendaArticulo)
       if(this.tiendaArticulo.articuloId != ""){
         this._tiendaArticuloService.guardar(this.tiendaArticulo).subscribe( () => {
           this.dialogRef.close();
@@ -56,7 +55,6 @@ export class StoreAddProductComponent {
       }
     }
     cambiarDatos(event: any){
-      console.log(event)
       this.tiendaArticulo.articuloId = event;
     }
 }

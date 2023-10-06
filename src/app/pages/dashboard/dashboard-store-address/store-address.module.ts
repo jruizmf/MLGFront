@@ -7,12 +7,14 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { MatMenuModule } from '@angular/material/menu';
 import { StoreAddressFormComponent } from './store-address-form/store-address-form.component';
 import { StoreAddProductComponent } from './components/store-add-product/store-add-product.component';
+import { StoreProductListComponent } from './store-product-list/store-product-list.component';
 
 @NgModule({
   declarations: [
     StoreAddressComponent,
     StoreAddressFormComponent,
-    StoreAddProductComponent
+    StoreAddProductComponent,
+    StoreProductListComponent
   ],
   imports: [
     CommonModule,

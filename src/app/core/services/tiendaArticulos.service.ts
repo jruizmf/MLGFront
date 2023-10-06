@@ -20,8 +20,8 @@ export class TiendaArticuloService {
     });
   }
 
-  buscarPorUsuario(term: string): any {
-    return this.http.get<any>(`https://localhost:44377/api/TiendaArticulo/Usuario/${term}` ).toPromise()
+  buscarPorTienda(term: string): any {
+    return this.http.get<any>(`https://localhost:44377/api/TiendaArticulo/Tienda/${term}` ).toPromise()
     .then((res: any) => {
       return res
     });
@@ -49,8 +49,8 @@ export class TiendaArticuloService {
             }));
   }
 
-  eliminar(order: IArticuloCliente): Observable<any> {
-    return this.http.delete<IArticuloCliente>(`${ORDER_API}${order.id}` )
+  eliminar(articulo: string): Observable<any> {
+    return this.http.delete<IArticuloCliente>(`${ORDER_API}${articulo}` )
             .pipe(map(async (x: any) => {
                 return x;
             }));

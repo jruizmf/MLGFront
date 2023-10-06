@@ -22,7 +22,6 @@ export class HttpResponseInterceptor implements HttpInterceptor {
           return event;
         },
         error: (error: any) => {
-          console.log(error)
           if(error.status === 401) {
              alert('Unauthorized access!')
           }
