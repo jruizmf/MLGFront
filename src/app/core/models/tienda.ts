@@ -1,5 +1,6 @@
 export interface ITienda {
-  _id?: string;
+  id?: string;
   sucursal: string;
   direccion: string;
+  fecha : Date
 }

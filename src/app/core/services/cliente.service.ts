@@ -4,9 +4,10 @@ import {  Observable, map } from 'rxjs';
 import { IAuthDto } from '../models/dto/IAuth';
 import { Router } from '@angular/router';
 import { ICliente } from '../models';
+import { environment } from 'src/environments/environment';
 
 
-const USER_API = 'https://localhost:44377/api/Cliente/';
+const USER_API = environment+'Cliente/';
 
 
 @Injectable({
@@ -25,7 +26,7 @@ export class ClienteService {
     });
   }
 
-  findOne(string: string): any {
+  buscarUno(string: string): any {
     return this.http.get<any>(`${USER_API+string}`).toPromise()
     .then((res: any) => {
       return res
@@ -38,19 +39,19 @@ export class ClienteService {
                 return u;
             }));
   }
-  save(user: ICliente): Observable<any> {
+  guardar(user: ICliente): Observable<any> {
     return this.http.post<ICliente>(`${USER_API}`,  user )
             .pipe(map(async (u: any) => {
                 return u;
             }));
   }
-  update(_id:string, user: ICliente): Observable<any> {
+  actualizar(_id:string, user: ICliente): Observable<any> {
     return this.http.put<ICliente>(`${USER_API}${_id}`,  user )
             .pipe(map(async (u: any) => {
                 return u;
             }));
   }
-  delete(_id:string): Observable<any> {
+  eliminar(_id:string): Observable<any> {
     return this.http.delete<IAuthDto>(`${USER_API}${_id}` )
             .pipe(map(async (u: any) => {
                 return u;

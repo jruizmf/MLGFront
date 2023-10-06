@@ -1,20 +1,19 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import {  Observable, map } from 'rxjs';
 import { IAuthDto } from '../models/dto/IAuth';
-import { IUsuario} from '../models/usuario';
 import { Router } from '@angular/router';
-import { IUsuarioDto } from '../models/dto/IUsuarioDto';
+import { ICliente, ITienda } from '../models';
+import { environment } from 'src/environments/environment';
 
 
-const USER_API = 'https://localhost:44377/api/Usuario/';
+const USER_API = environment.apiPath+'Tienda/';
 
 
 @Injectable({
   providedIn: 'root',
 })
-export class UsuarioService {
-  public user: Observable<IUsuario> = new Observable<IUsuario>();
+export class TiendaService {
 
   constructor(private http: HttpClient, public router: Router) {
 
@@ -34,20 +33,20 @@ export class UsuarioService {
     });
   }
 
-  register(user: IUsuarioDto): Observable<any> {
-    return this.http.post<IUsuarioDto>(`${USER_API}`, user)
+  register(user: ITienda): Observable<any> {
+    return this.http.post<ITienda>(`${USER_API}`, user)
             .pipe(map(async (u: any) => {
                 return u;
             }));
   }
-  guardar(user: IUsuario): Observable<any> {
-    return this.http.post<IUsuario>(`${USER_API}create`,  user )
+  guardar(user: ITienda): Observable<any> {
+    return this.http.post<ITienda>(`${USER_API}`,  user )
             .pipe(map(async (u: any) => {
                 return u;
             }));
   }
-  actualizar(_id:string, user: IUsuario): Observable<any> {
-    return this.http.put<IUsuario>(`${USER_API}${_id}`,  user )
+  actualizar(_id:string, user: ITienda): Observable<any> {
+    return this.http.put<ITienda>(`${USER_API}${_id}`,  user )
             .pipe(map(async (u: any) => {
                 return u;
             }));

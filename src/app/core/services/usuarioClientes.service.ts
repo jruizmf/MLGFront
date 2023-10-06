@@ -20,28 +20,28 @@ export class UsuarioClienteService {
     });
   }
 
-  findOne(term: string): any {
+  buscarUno(term: string): any {
     return this.http.get<any>(`${USUARIO_CLIENTE_API}${term}` ).toPromise()
     .then((res: any) => {
       return res
     });
   }
   
-  save(usuarioCliente: IUsuarioDto): Observable<any> {
+  guardar(usuarioCliente: IUsuarioDto): Observable<any> {
     return this.http.post<IUsuarioDto>(`${USUARIO_CLIENTE_API}`,  usuarioCliente )
             .pipe(map(async (x: any) => {
                 return x;
             }));
   }
 
-  update(id: string, usuarioCliente: IUsuarioDto): Observable<any> {
+  actualizar(id: string, usuarioCliente: IUsuarioDto): Observable<any> {
     return this.http.put<IUsuarioCliente>(`${USUARIO_CLIENTE_API}${id}`,  usuarioCliente )
             .pipe(map(async (x: any) => {
                 return x;
             }));
   }
 
-  delete(usuarioCliente: any): Observable<any> {
+  eliminar(usuarioCliente: any): Observable<any> {
     return this.http.delete<IUsuarioCliente>(`${USUARIO_CLIENTE_API}${usuarioCliente}` )
             .pipe(map(async (x: any) => {
                 return x;

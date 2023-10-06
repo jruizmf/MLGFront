@@ -87,7 +87,7 @@ export class DashboardProductFormComponent {
     setTimeout(()=>{   
       if (this.isEditing) {
        
-        this._articuloService.update(this.articuloId, articulo).subscribe( () => {
+        this._articuloService.actualizar(this.articuloId, articulo).subscribe( () => {
           this.form.disable();
           this.router.navigate(['dashboard/articulos']);
           }, () => {
@@ -96,7 +96,7 @@ export class DashboardProductFormComponent {
         )
       } else{
         delete articulo.id
-        this._articuloService.save(articulo).subscribe( () => {
+        this._articuloService.guardar(articulo).subscribe( () => {
           this.form.disable();
           this.router.navigate(['dashboard/articulos']);
           }, () => {

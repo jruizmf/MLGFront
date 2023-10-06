@@ -12,6 +12,7 @@ import { DashboardOrderComponent } from './dashboard-order/dashboard-order.compo
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { DashboardSavedItemFormComponent } from './dashboard-saved-item/dashboard-saved-item-form/dashboard-saved-item-form.component';
+import { StoreAddressComponent } from './dashboard-store-address/store-address.component';
 
 @NgModule({
   declarations: [

@@ -23,7 +23,7 @@ export class FileService {
             });
   }
 
-  delete(url: string): Observable<any> {
+  eliminar(url: string): Observable<any> {
     return this.http.post<any>(`${FILE_API}delete`,  url )
             .pipe(map(async (res: any) => {
                 return res;

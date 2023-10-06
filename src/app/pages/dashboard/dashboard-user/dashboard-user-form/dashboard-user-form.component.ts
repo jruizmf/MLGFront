@@ -40,7 +40,7 @@ export class DashboardUserFormComponent {
       this.isEditing = false
     } else{
       this.isEditing = true;
-      this._usuarioClienteService.findOne(this.userID).then((res:any) => {
+      this._usuarioClienteService.buscarUno(this.userID).then((res:any) => {
         this.usuario = {
           usuarioId: res.usuario.id,
           usuarioNombre: res.usuario.usuarioNombre,
@@ -54,7 +54,7 @@ export class DashboardUserFormComponent {
   }
 
   ngOnInit(): void {
-    this._usuarioService.findOne(this.userID).then((res:any) => {
+    this._usuarioService.buscarUno(this.userID).then((res:any) => {
       console.log(res)
       this.usuario = {
         usuarioId: res.usuario.Id,
@@ -74,12 +74,12 @@ export class DashboardUserFormComponent {
   getUserForm():IUsuario{
     return this.usuario;
   }
-  save() {
+  guardar() {
     let _usuario: IUsuarioDto = this.getUserForm()
 
       if (this.isEditing) {
         console.log(_usuario)
-        this._usuarioService.update(this.userID, _usuario).subscribe( () => {
+        this._usuarioService.actualizar(this.userID, _usuario).subscribe( () => {
           console.log("Update")
           Swal.fire('Actualización de usuario..', 'Usuario modificado exitosamente!', 'success')
           this.router.navigate(['dashboard/usuarios']);
@@ -92,7 +92,7 @@ export class DashboardUserFormComponent {
       } else{
 
         if(this.usuario.password == this.confirmarContrasena){
-          this._usuarioService.save(_usuario).subscribe( () => {
+          this._usuarioService.guardar(_usuario).subscribe( () => {
             this.form.disable();
             this.router.navigate(['dashboard/usuarios']);
             }, (error) => {

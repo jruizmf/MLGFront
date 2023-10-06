@@ -40,7 +40,7 @@ export class CartComponent {
   ngOnInit(): void {
    
   }
-  calculateTotals(event: any, i:number){
+  calcularTotales(event: any, i:number){
     let cart = JSON.parse(localStorage.getItem('cart') || '{}');
       this.cantidadEnProducto[i] = event
       this.totalProducto[i] = this.carritoCompras[i].total * this.cantidadEnProducto[i];
@@ -51,7 +51,7 @@ export class CartComponent {
       this.total.total = this.total.precio + this.total.impuesto
     });
   }
-  createOrder():void{
+  crearOrden():void{
     Swal.fire({
       title: 'Está seguro de realizar su orden?',
       text: 'No podrá cancelar esta orden!',
@@ -72,7 +72,7 @@ export class CartComponent {
           fecha: new Date
       }
       
-        this._ordenService.save(orden).subscribe((res:any) => {
+        this._ordenService.guardar(orden).subscribe((res:any) => {
           console.log(res)
 
           Swal.fire("Articulo", "El Articulo se agregó exitosamente...", "success")
@@ -93,7 +93,7 @@ export class CartComponent {
     
   }
 
-  removeItem(i:number){
+  eliminarElemento(i:number){
     let cartString  = localStorage.getItem('cart')
     if(cartString != null){
       this.carritoCompras.splice(i, 1);

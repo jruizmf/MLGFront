@@ -24,7 +24,7 @@ export class DashboardOrderComponent implements OnInit {
     })
   }
   eliminarProducto(articulo: IArticuloCliente){
-    this._ordenService.delete(articulo).subscribe( (res) => {
+    this._ordenService.eliminar(articulo).subscribe( (res) => {
       window.location.reload();
       }, (error) => {
         Swal.fire('Algo salió mal..', 'Favor de contactar a su administrador!', 'error')

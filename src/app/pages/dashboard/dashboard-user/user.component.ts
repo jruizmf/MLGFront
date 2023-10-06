@@ -25,7 +25,7 @@ export class UserComponent implements OnInit {
     })
   }
   eliminarUsuario(_id: any){
-    this._usuarioService.delete(_id).subscribe( (res) => {
+    this._usuarioService.eliminar(_id).subscribe( (res) => {
       window.location.reload();
       }, (error) => {
         console.log()

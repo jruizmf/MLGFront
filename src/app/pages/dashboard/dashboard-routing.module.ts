@@ -22,7 +22,7 @@ const DashboardChildrenRoute: Routes = [
   },
   {
     path: 'tiendas',
-    component: StoreAddressComponent
+    loadChildren: () => import('./dashboard-store-address/store-address.module').then(m => m.StoreAddressModule)
   },
   {
     path: 'mis-articulos',

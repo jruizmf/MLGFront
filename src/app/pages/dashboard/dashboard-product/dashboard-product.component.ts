@@ -27,7 +27,7 @@ export class DashboardProductComponent  implements OnInit {
     })
   }
   deleteProduct(_id: string){
-    this._articuloService.delete(_id).subscribe( (res) => {
+    this._articuloService.eliminar(_id).subscribe( (res) => {
       window.location.reload();
       }, (error) => {
         Swal.fire('Algo salió mal..', 'Favor de contactar a su administrador!', 'error')

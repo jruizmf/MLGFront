@@ -26,19 +26,19 @@ export class ArticulosService {
     });
   }
 
-  save(product: IArticulo): Observable<any> {
+  guardar(product: IArticulo): Observable<any> {
     return this.http.post<IArticulo>(`${PRODUCT_API}`,  product )
             .pipe(map(async (p: any) => {
                 return p;
             }));
   }
-  update(index:string, product: IArticulo): Observable<any> {
+  actualizar(index:string, product: IArticulo): Observable<any> {
     return this.http.put<IArticulo>(`${PRODUCT_API}${index}`,  product )
             .pipe(map(async (p: any) => {
                 return p;
             }));
   }
-  delete(_id: string): Observable<any> {
+  eliminar(_id: string): Observable<any> {
     return this.http.delete(`${PRODUCT_API}${_id}` )
             .pipe(map(async () => {
                 return true;

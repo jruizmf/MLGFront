@@ -22,7 +22,7 @@ export class DashboardProfileComponent implements OnInit {
     this.user = this._auth.getUser();
     console.log("this.user")
     console.log(this.user)
-    this._usuarioService.findOne(this.user.id!).then((res:any) => {
+    this._usuarioService.buscarUno(this.user.id!).then((res:any) => {
       this.usuario = res;
     })
   }
