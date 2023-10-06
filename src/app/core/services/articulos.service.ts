@@ -13,13 +13,13 @@ export class ArticulosService {
   constructor(private http: HttpClient) { }
   
   getAll(filter: any): any {
-    return this.http.get<any>(`${PRODUCT_API}`,  filter ).toPromise()
+    return this.http.get<any>(`${PRODUCT_API}` ).toPromise()
     .then((res: any) => {
       return res
     });
   }
 
-  findByTerm(term: string): any {
+  getOne(term: string): any {
     return this.http.get<any>(`${PRODUCT_API}${term}` ).toPromise()
     .then((res: any) => {
       return res
@@ -33,7 +33,7 @@ export class ArticulosService {
             }));
   }
   update(index:string, product: IArticulo): Observable<any> {
-    return this.http.patch<IArticulo>(`${PRODUCT_API}${index}`,  product )
+    return this.http.put<IArticulo>(`${PRODUCT_API}${index}`,  product )
             .pipe(map(async (p: any) => {
                 return p;
             }));

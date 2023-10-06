@@ -36,6 +36,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import {MatStepperModule} from '@angular/material/stepper';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
+import { HomeProductsComponent } from '../pages/home/home-products/home-products.component';
 
 const commonModules = [
         FormsModule,

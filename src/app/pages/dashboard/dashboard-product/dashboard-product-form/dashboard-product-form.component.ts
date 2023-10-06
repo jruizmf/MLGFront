@@ -19,6 +19,7 @@ export class DashboardProductFormComponent {
   form: FormGroup = new FormGroup({});
   attributeForm: FormGroup = new FormGroup({});
   errors:any[]= [];
+
   articulo: IArticulo = {
     codigo: "",
     descripcion: "",
@@ -46,17 +47,17 @@ export class DashboardProductFormComponent {
       this.form = this.fb.group({
         codigo: ["", [Validators.required]],
         descripcion: ["", [Validators.required]],
-        precio: ["", [Validators.required]],
+        precio: [0, [Validators.required]],
         stock:[0],
       });
-      this.articuloId = this.route.snapshot.paramMap.get('term')
+      this.articuloId = this.route.snapshot.paramMap.get('term');
+
       if (this.articuloId == null) {
-        this.isEditing = false
-        
+        this.isEditing = false;
         this.isLoading = false;
       } else{
         this.isEditing = true;
-        this._articuloService.findByTerm(this.articuloId).then((articulo:any) => {
+        this._articuloService.getOne(this.articuloId).then((articulo:any) => {
 
           this.articulo = articulo as IArticulo;
           
@@ -78,7 +79,6 @@ export class DashboardProductFormComponent {
   }
 
   submit(form: FormGroup) {
-    console.log(form)
     if (form.invalid) {
       Swal.fire('Aun hay campos sin completar...', 'Por favor revise el formulario!', 'error')
       return;
@@ -86,32 +86,46 @@ export class DashboardProductFormComponent {
     let articulo: IArticulo = this.getProduct();
     setTimeout(()=>{   
       if (this.isEditing) {
+       
         this._articuloService.update(this.articuloId, articulo).subscribe( () => {
-          this.form.disable();
-          this.router.navigate(['dashboard/articulo']);
-          }, () => {
-            Swal.fire('SAlgo salio mal.', 'Favor de buscar asistencia tecnica!', 'error')
-          }
-        )
-      } else{
-        this._articuloService.save(articulo).subscribe( () => {
           this.form.disable();
           this.router.navigate(['dashboard/articulos']);
           }, () => {
             Swal.fire('SAlgo salio mal.', 'Favor de buscar asistencia tecnica!', 'error')
           }
         )
+      } else{
+        delete articulo.id
+        this._articuloService.save(articulo).subscribe( () => {
+          this.form.disable();
+          this.router.navigate(['dashboard/articulos']);
+          }, () => {
+            Swal.fire('Algo salio mal.', 'Favor de buscar asistencia tecnica!', 'error')
+          }
+        )
       }
     
-    }, 5000);   
+    }, 6000);   
   }
 
   getProduct():IArticulo{
-
-    this._uploadService.upload(this.imagen).then((res: any) => {
-      console.log(res)
-      this.articulo.imagen = res;
-    })
+    
+    this.articulo = {
+      id: this.articuloId,
+      codigo:this.form.value.codigo,
+      descripcion:this.form.value.descripcion,
+      precio:this.form.value.precio,
+      stock:Number(this.form.value.stock),
+      imagen: ""
+    }
+    console.log(this.imagen)
+    if(this.imagen != null){
+      this._uploadService.upload(this.imagen).then((res: any) => {
+        this.articulo.imagen = res;
+      })
+  
+    }
+   
     return this.articulo;
   }
 

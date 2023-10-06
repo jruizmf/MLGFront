@@ -7,17 +7,16 @@
     <div class="grid grid-cols-12 gap-6 xxl:gap-8">
       <div *ngFor="let articulo of Articulos" class="col-span-12 md:col-span-6 xl:col-span-4">
         <mat-card class="ll-product">
-          <img mat-card-image [src]="articulo?.images[0] ? articulo?.images[0] : 'assets/images/No_image_available.png'" alt="{{ articulo.nombre }}"
+          <img mat-card-image [src]="articulo?.imagen ?  imageUrl +articulo?.imagen  : 'assets/images/No_image_available.png'" alt="{{ articulo.codigo }}"
            style="width: 100%; margin: 0 0 20px; width: 482px; height: 241px;" />
           <mat-card-content class="flex">
             <div class="flex-none w-10">
-              <!-- <img src="{{ product?.created_by?.avatar }}" alt="product?.created_by?.name" /> -->
             </div>
             <div class="flex-grow pl-3">
               <h2 class="ll-product__name">
-                <a [routerLink]="['/articulos', articulo.id]">{{ articulo.nombre }}</a>
+                <a [routerLink]="['/articulos', articulo.id]">{{ articulo.codigo }}</a>
               </h2>
-              <p>{{ articulo.description | slice: 0:25}}</p>
+              <p>{{ articulo.descripcion | slice: 0:25}}</p>
               <div class="flex justify-between mt-5">
                 <div class="ll-product__price-label">Prices:</div>
                 <div class="ll-product__price text-accent font-bold">
@@ -29,29 +28,7 @@
                 </div> 
               </div>
                <div class="flex justify-between my-5"> <!--*ngIf="expandPrices"> -->
-                <table >
-                  <thead>
-                    <tr>
-                      <th style="height: 19px; width: 80px; border-bottom: 1px solid #f5f5f5; color: #00000070;">
-                          Size
-                      </th>
-                      <th style="height: 19px; width: 80px; border-bottom: 1px solid #f5f5f5; color: #00000070;">
-                          Client
-                      </th>
-                      <th style="height: 19px; width: 80px; border-bottom: 1px solid #f5f5f5; color: #00000070;">
-                          Federal
-                      </th>
-                      <th style="height: 19px; width: 80px; border-bottom: 1px solid #f5f5f5; color: #00000070;">
-                          Frecuent
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <td class="cell-price">
-                      {{articulo.precio}}
-                    </td>
-                  </tbody>
-                </table>
+                <h5> {{articulo.precio | currency : 'MXN'}}</h5>
               </div>
             </div>
           </mat-card-content>
@@ -65,7 +42,7 @@
                 style="background-color: #15b3e8; color: #FFFFFF;"  
                 class="px-4"
               >
-                View Details
+                Detalles
               </a>
             </div>
          
@@ -74,7 +51,7 @@
       </div>
     </div>
     <div class="text-center mt-10">
-      <a mat-raised-button color="accent" [routerLink]="['/products']" style="background-color:#274773; color: #FFFFFF;"  class="px-8 py-2 text-lg">Browse More</a>
+      <a mat-raised-button color="accent" [routerLink]="['/products']" style="background-color:#274773; color: #FFFFFF;"  class="px-8 py-2 text-lg">Ver mas</a>
     </div>
   </div>
 </div>

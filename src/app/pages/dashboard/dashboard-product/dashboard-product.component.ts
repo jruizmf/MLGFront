@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { IArticulo } from 'src/app/core/models';
 import { ArticulosService } from 'src/app/core/services/articulos.service';
 import Swal from 'sweetalert2';
+import { environment } from './../../../../environments/environment';
 
 @Component({
   selector: 'app-dashboard-product',
@@ -12,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class DashboardProductComponent  implements OnInit {
   view = 'list';
-
+  imageUrl : string = environment.filesPath;
   articulos: IArticulo[] | undefined;
   constructor(private _articuloService : ArticulosService, private router: Router, public dialog: MatDialog) {}
 
@@ -21,6 +22,7 @@ export class DashboardProductComponent  implements OnInit {
   }
   async  getAll(){
     await this._articuloService.getAll({}).then((x: any[]) => {
+      console.log(x)
       this.articulos = x;
     })
   }

@@ -45,7 +45,7 @@ export class ClienteService {
             }));
   }
   update(_id:string, user: ICliente): Observable<any> {
-    return this.http.patch<ICliente>(`${USER_API}${_id}`,  user )
+    return this.http.put<ICliente>(`${USER_API}${_id}`,  user )
             .pipe(map(async (u: any) => {
                 return u;
             }));

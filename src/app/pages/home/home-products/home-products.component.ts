@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { productsDB } from '../../../shared/data/products'; 
+import { environment } from './../../../../environments/environment';
 import { IArticulo } from 'src/app/core/models';
 import { ArticulosService } from 'src/app/core/services/articulos.service';
 @Component({
@@ -8,7 +8,8 @@ import { ArticulosService } from 'src/app/core/services/articulos.service';
   styleUrls: ['./home-products.component.scss']
 })
 export class HomeProductsComponent implements OnInit {
-  @Input() Articulos: any = [];
+  @Input() Articulos: IArticulo[] = [];
+  imageUrl : string = environment.filesPath;
   expandPrices:boolean = false;
   constructor(private _articuloService: ArticulosService) { 
    this.getAll();
@@ -20,6 +21,7 @@ export class HomeProductsComponent implements OnInit {
 
   async  getAll(){
     await this._articuloService.getAll({}).then((x: any[]) => {
+      console.log(x)
       this.Articulos = x;
     })
   }

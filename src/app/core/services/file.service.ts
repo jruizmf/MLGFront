@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { Observable, map } from 'rxjs';
 
-const FILE_API = 'http://localhost:44377/api/Upload/';
+const FILE_API = 'https://localhost:44377/api/Upload/';
 
 @Injectable({
   providedIn: 'root'

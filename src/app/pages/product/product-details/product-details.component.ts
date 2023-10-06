@@ -3,9 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ArticulosService } from 'src/app/core/services/articulos.service';
-import { ProductStepsModalComponent } from '../components/product-steps-modal/product-steps-modal.component';
-import { IArticulo } from 'src/app/core/models';
 import { FileService } from 'src/app/core/services/file.service';
+import { environment } from './../../../../environments/environment';
 import Swal from 'sweetalert2';
 import { CartService } from 'src/app/core/services/cart.service';
 
@@ -14,45 +13,11 @@ export interface cart {
   productName: string,
   slug: string,
   image: string,
-  price: Price | undefined,
+  price: string ,
   quantity: number,
-  total: number,
-  optionComposes: OptionCompose[]
-}
-export interface Price {
-  sizeTitle: string,
-  clientPrice: string,
-  frequentPrice: string,
-  federalPrice: string,
-  sizes: Size[]
-}
-export interface PriceItem {
-  sizeTitle: string,
-  price: number,
-  sizes: Size[]
-}
-export interface Size{
-  sizeType: string, 
-  sizeValue: number, 
-  sizeUnit: string
-}
-export interface OptionCompose {
-  productComposeId: string,
-  values: Value[],
-  increment: number
+  total: number
 }
 
-export interface Value {
-  valueName: string,
-  value: string
-}
-export interface SalesForOrder {
-  decrementClient: number,
-  decrementFederal: number,
-  decrementFrequent: number,
-  unitSale: number,
-  weight:number
-}
 @Component({
   selector: 'll-product-details',
   templateUrl: './product-details.component.html',
@@ -61,14 +26,13 @@ export interface SalesForOrder {
 export class ProductDetailsComponent implements OnInit {
   isDisabled:boolean =true;
   cartItem: any;
-  product: any;
-  options: any;
+  articulo: any;
+  imageUrl : string = environment.filesPath;
   slug: any;
   size: any;
   salesForOrderPermits: any[] = [];
   salesForOrderPermit: any | undefined;
   selectedPrice:number;
-  price: PriceItem | undefined;
   selectedImage: string = 'assets/images/No_image_available.png';
 
   constructor(private _articulosService: ArticulosService, private router: Router, private _cartService: CartService, private _fileService: FileService, private route : ActivatedRoute, private _authService: AuthService, private dialog: MatDialog) { 
@@ -79,7 +43,7 @@ export class ProductDetailsComponent implements OnInit {
       productName: "",
       slug: this.slug,
       image: "",
-      price: this.price,
+      price: 0,
       quantity: 0,
       total: 0,
       optionComposes: []
@@ -90,57 +54,23 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.isDisabled = !this._authService.isAuthenticated();
     this.getProduct(this.slug);
-    this.price = this.product.attributes[0].prices[0];
   }
   selectImage(i: number){
-    this.selectedImage = this.product.images[i]
+    this.selectedImage = this.articulo.imagen
   }
   getProduct(slug:string) : void{
-    this._articulosService.findByTerm(slug).then((res: any) => {
-      this.product = res.product;
-      this.options = res.options;
-      if (typeof this.product != 'undefined') {
-        if (typeof this.product.images != 'undefined') {
-          this.selectedImage = this.product.images[0];
-        } 
-        if (typeof this.product.attributes != 'undefined') {
-          this.selectPrice(this.product.attributes[0].prices[0])
-          this.salesForOrderPermits = this.product.attributes[0].salesForOrderPermit;
-          this.selectSalesForOrderPermit(this.product.attributes[0].salesForOrderPermit[0])
+    this._articulosService.getOne(slug).then((res: any) => {
+      this.articulo = res;
+      if (typeof this.articulo != 'undefined') {
+        if (typeof this.articulo.imagen != 'undefined') {
+          this.selectedImage = this.articulo.imagen;
         }
-      
       }
 
     })
 
   }
-  selectPrice(item: any){
-   
-    let role =  this._authService.getRole() as string
-    this.size = item;
-    console.log(role)
-    let price: number = 0;
-    if(role == "client"){
-      price = item.clientPrice;
-    }else if(role == "frequent"){
-      price = item.frequentPrice;
-    }else if(role == "federal"){
-      price = item.federalPrice;
-    }else{
-      price = item.federalPrice;
-    }
-    let sizes = item.sizes.map((x:any) =>{
-      delete x._id
-      return x;
-    })
-    this.price = {
-      sizeTitle:item.sizeTitle,
-      sizes: sizes,
-      price: price
-    };
-    
-    this.selectedPrice = price;
-  }
+  
   selectSalesForOrderPermit(item: any){
     this.salesForOrderPermit = item;
     this.cartItem.quantity = item.unitSale;
@@ -171,32 +101,25 @@ export class ProductDetailsComponent implements OnInit {
   }
   openDialog(): void {
     if (this.cartItem.quantity == 0) {
-      Swal.fire('Quantity not added..', 'Please select the quantity of products!', 'warning')
+      Swal.fire('Cantidad no seleccionada..', 'Seleccione la cantidad de articulos que desea!', 'warning')
       return;
     }
+
     this.cartItem = {
-      productId: this.product._id,
-      productName: this.product.productName,
-      slug: this.product.slug,
-      image: this.product.images[0],
-      price: this.price,
+      productId: this.articulo._id,
+      productName: this.articulo.productName,
+      slug: this.articulo.slug,
+      image: this.articulo.imagen,
+      price: this.articulo.precio,
       quantity: this.cartItem.quantity,
-      total: this.selectedPrice,
-      optionComposes: []
+      total: this.selectedPrice
     }
-    const dialogRef = this.dialog.open(ProductStepsModalComponent, {
-      data: {
-        data: this.options,
-        cartItem: this.cartItem
-      }
-    });
+
   
-    dialogRef.afterClosed().subscribe(result => {
-      if (typeof result != 'undefined') {
+  
         let cartString  = localStorage.getItem('cart')
         let cart: any = { items:[] }
      
-        this.cartItem.optionComposes = result;
 
         if(cartString != null){
           cart = JSON.parse(cartString)
@@ -206,18 +129,16 @@ export class ProductDetailsComponent implements OnInit {
           ));
             
           this._cartService.sendNumber(cart.items.length);
-          this.router.navigate(['products']);
+          this.router.navigate(['articulos']);
         } else{
           this._cartService.sendNumber(1);
           localStorage.setItem('cart', JSON.stringify(
             {items: [this.cartItem]}
           ));
       
-          this.router.navigate(['products']);
+          this.router.navigate(['articulos']);
         }
         
-      }
-    });
   }
 
 }

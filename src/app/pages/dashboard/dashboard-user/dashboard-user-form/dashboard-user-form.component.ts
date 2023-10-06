@@ -19,7 +19,6 @@ export class DashboardUserFormComponent {
   form: FormGroup = new FormGroup({});
   flag: boolean = true;
   errors:any[]= [];
-  roles:any[]= ['admin', 'super-user', 'client', 'federal', 'frequent'];
   usuario: IUsuarioDto = {
     usuarioNombre: "",
     nombre: "",
@@ -42,8 +41,6 @@ export class DashboardUserFormComponent {
     } else{
       this.isEditing = true;
       this._usuarioClienteService.findOne(this.userID).then((res:any) => {
-        console.log("res")
-        console.log(res)
         this.usuario = {
           usuarioId: res.usuario.id,
           usuarioNombre: res.usuario.usuarioNombre,

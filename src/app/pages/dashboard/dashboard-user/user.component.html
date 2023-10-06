@@ -31,12 +31,12 @@
                 <div class="max-h-16 w-16 flex-none mr-3 border" >
                   <img [src]="'assets/images/avatar.png'" alt="img">
                 </div>
-                <h6 class="flex-auto">{{ usuario.usuario.usuarioNombre }}</h6>
+                <h6 class="flex-auto">{{ usuario.usuario?.usuarioNombre }}</h6>
               </a>
             </div>
-            <div class="w-2/12 text-center">{{usuario.usuario.status == 1 ? 'Activo' : 'Inactivo'}}</div>
-            <div class="w-2/12 text-center">{{usuario.cliente.nombre}} {{usuario.cliente.apellidos}}</div>
-            <div class="w-3/12 text-center">{{usuario.cliente.direccion}}</div>
+            <div class="w-2/12 text-center">{{usuario.usuario?.status == 1 ? 'Activo' : 'Inactivo'}}</div>
+            <div class="w-2/12 text-center">{{usuario.cliente?.nombre}} {{usuario.cliente?.apellidos}}</div>
+            <div class="w-3/12 text-center">{{usuario.cliente?.direccion}}</div>
             <div class="w-1/12 text-right">
               <button class="action_icon__btn" mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>

@@ -6,9 +6,9 @@
 				<img [src]="'assets/images/No_image_available.png'" alt="profile" class="w-full h-full object-cover">
 			</div>
 			<div>
-				<h5>{{ user.nombre}} {{ user.apellidos}}</h5>
+				<h5>{{ usuario.cliente?.nombre }} {{ usuario.cliente?.apellidos }}</h5>
 				<p class="leading-normal">
-					<span class="font-medium">Usuario</span>: {{ user.usuarioNombre}}</p>
+					<span class="font-medium">Usuario</span>: {{ usuario.usuario?.usuarioNombre }}</p>
 			</div>
 		</div>
 		<div class="w-full sm:w-1/2 sm:pl-5 mt-5 mmd:t-0">
@@ -19,7 +19,9 @@
 	<div class="border bg-white mt-8 rounded-md">
 		<div class="flex p-4 bg-gray-200">
 			<h6 class="text-normal">Información</h6>
-			
+			<a class="text-blue-400 hover:text-accent ml-auto flex items-center" [routerLink]="'perfil/editar/'+usuario.id">
+				<mat-icon class="_edit_icon mr-2">edit</mat-icon>
+				Editar</a>
 		</div>
 		<div class="flex flex-wrap p-4">
 			<div class="w-full sm:w-1/2">
@@ -29,7 +31,7 @@
 						Direccion:
 					</div>
 					<div class="ll-dataset__value">
-						{{ user.direccion }}
+						{{ usuario.cliente?.direccion }}
 					</div>
 				</div>
 			</div>

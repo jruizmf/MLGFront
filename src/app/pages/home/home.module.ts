@@ -10,7 +10,8 @@ import { HomeProductsComponent } from './home-products/home-products.component';
 
 @NgModule({
   declarations: [HomeComponent, CartComponent, HomeProductsComponent],
-  imports: [CommonModule, HomeRoutingModule, SharedModule, NgParticlesModule]
+  imports: [CommonModule, HomeRoutingModule, SharedModule, NgParticlesModule],
+  exports:[HomeProductsComponent]
 })
 export class HomeModule {
 }

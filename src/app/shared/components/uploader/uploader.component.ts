@@ -11,15 +11,15 @@ export class UploaderComponent implements OnInit  {
   @Input() limit : number =  10;
   @Output() eventEmited = new EventEmitter<any[]>();
   previousFiles: boolean = false
-  files: any[] = [];
+  files: any = [];
   
   constructor(){
   }
 
   ngOnInit(){
-    if (typeof this.images != 'undefined' && typeof this.images[0] != 'undefined') {
-      if (this.images[0] != '') {
-        this.files = this.images;
+    if (typeof this.images != 'undefined') {
+      if (this.images != '') {
+        this.files.push(this.images);
         this.previousFiles = true;
       }
     }
