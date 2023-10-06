@@ -107,7 +107,7 @@ export class DashboardUserFormComponent {
     
    
   }
-  openDialog(): void {
+  abrirModal(): void {
     const dialogRef = this.dialog.open(DashboardUserPasswordEditorComponent, {
       data: {
       }

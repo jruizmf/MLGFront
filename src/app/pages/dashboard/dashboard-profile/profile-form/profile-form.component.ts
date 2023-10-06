@@ -91,7 +91,7 @@ export class ProfileFormComponent implements OnInit {
       
       }
   }
-  openDialog(): void {
+  abrirModal(): void {
     const dialogRef = this.dialog.open(DashboardUserPasswordEditorComponent, {
       data: {
       }

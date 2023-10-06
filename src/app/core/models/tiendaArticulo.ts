@@ -2,6 +2,6 @@
 export interface ITiendaArticulo {
   id?: string;
   articuloId?: string;
-  clienteId?: string;
+  tiendaId?: string;
   fecha?: Date;
 }

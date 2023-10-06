@@ -3,6 +3,8 @@ import { ITienda } from 'src/app/core/models';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { TiendaService } from 'src/app/core/services/tienda.service';
+import { MatDialog } from '@angular/material/dialog';
+import { StoreAddProductComponent } from './components/password-editor/store-add-product.component';
 
 
 
@@ -16,7 +18,7 @@ export class StoreAddressComponent {
   tiendas: ITienda[]  = [];
   imageUrl: string = environment.filesPath;
 
-  constructor(private _tiendaService: TiendaService, ) {}
+  constructor(private _tiendaService: TiendaService, private dialog: MatDialog) {}
   ngOnInit(): void {
     this.obtenerTodo()
   }
@@ -39,5 +41,17 @@ export class StoreAddressComponent {
   }
   handleDismiss(event:any){
     
+  }
+  abrirModal(id:string): void {
+    const dialogRef = this.dialog.open(StoreAddProductComponent, {
+      data: {
+        tiendaId:id
+      }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (typeof result != 'undefined') {
+      }
+    });
   }
 }

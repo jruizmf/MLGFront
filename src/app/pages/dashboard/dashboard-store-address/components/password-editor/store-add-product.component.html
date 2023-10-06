@@ -1,0 +1,27 @@
+
+<div class="login w-full max-w-xl rounded-md mx-auto border p-4 sm:p-8 xl:p-20" style="width: 500px;">
+<form (ngSubmit)="submit()" autocomplete="off" class="p10">
+    <h3 style="color: #326EA8; font-weight: 500;">Agregar articulos a tienda</h3>
+    <!-- User Meta Start -->
+    <div class="border bg-white mt-8 ">
+        <div class="flex flex-wrap p-4">
+            <div class="w-full  mt-4 sm:mt-0">
+                <div class="ll-dataset">
+                    <mat-form-field style="    width: 100%;">
+                        <mat-label>Articulos</mat-label>
+                        <select matNativeControl class="form-select" [(ngModel)]="tiendaArticulo.articuloId" (ngModelChange)="cambiarDatos($event)" >
+                            <option value="" selected>Seleccionar Articulo</option>
+                            <option *ngFor="let producto of productos; let i = index;"  [value]="producto.id" >{{producto.descripcion}}</option>
+                  
+                    </select> 
+                </mat-form-field>
+            </div>
+            <div class="ll-dataset">
+        
+                </div>
+                <button mat-button color="success" type="submit">Agregar a tienda</button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>

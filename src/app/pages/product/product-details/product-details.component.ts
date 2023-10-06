@@ -79,7 +79,7 @@ export class ProductDetailsComponent implements OnInit {
   selectQuantity(event:any){;
     this.cartItem.quantity = event;
   }
-  openDialog(): void {
+  abrirModal(): void {
     if (this.cartItem.quantity == 0) {
       Swal.fire('Cantidad no seleccionada..', 'Seleccione la cantidad de articulos que desea!', 'warning')
       return;
